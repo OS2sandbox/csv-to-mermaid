@@ -1,0 +1,5 @@
+filename: 'example.csv'
+chart_type: 'xychart-beta'
+title: 'Sales Revenue'
+y-axis: 'Revenue (in $)'
+y-range: '4000 --> 11000'

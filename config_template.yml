@@ -1,2 +1,5 @@
-filename: 'your_file.csv'
-chart_type: 'flowchart' # or 'barchart'
+filename: ''
+chart_type: ''
+title: ''
+y-axis: ''
+y-range: ''

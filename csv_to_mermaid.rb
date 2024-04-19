@@ -2,30 +2,31 @@ require 'csv'
 require 'yaml'
 
 def csv_to_mermaid(yaml_file)
-  config = YAML.load_file(yaml_file)
-  csv_file = config['filename']
-  chart_type = config['chart_type']
+  begin
+    config = YAML.load_file(yaml_file)
 
-  data = CSV.read(csv_file, headers: true)
-  mermaid_code = ""
+    csv_file = config['filename']
+    chart_type = config['chart_type']
 
-  if chart_type == 'flowchart'
-    mermaid_code = "graph TD;\n"
-    data.each do |row|
-      row.each_cons(2) do |a, b|
-        mermaid_code += "#{a} --> #{b};\n" unless b.nil?
-      end
+    data = CSV.read(csv_file, headers: true)
+
+    mermaid_code = ""
+
+    if chart_type == 'xychart-beta'
+      mermaid_code = "xychart-beta\n"
+      mermaid_code += "title \"#{config['title']}\"\n"
+      mermaid_code += "x-axis [#{data['Month'].join(', ')}]\n"
+      mermaid_code += "y-axis \"#{config['y-axis']}\" #{config['y-range']}\n"
+      mermaid_code += "bar [#{data['Revenue'].join(', ')}]\n"
+      mermaid_code += "line [#{data['Revenue'].join(', ')}]\n"
+    else
+      return "Invalid chart type specified in YAML file."
     end
-  elsif chart_type == 'barchart'
-    mermaid_code = "pie title Your Barchart\n"
-    data.each do |row|
-      mermaid_code += "\"#{row[0]}\" : #{row[1]}\n"
-    end
-  else
-    return "Invalid chart type specified in YAML file."
+
+    mermaid_code
+  rescue StandardError => e
+    puts "An error occurred: #{e.message}"
   end
-
-  mermaid_code
 end
 
 puts csv_to_mermaid('config.yml')
