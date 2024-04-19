@@ -1,0 +1,2 @@
+filename: 'your_file.csv'
+chart_type: 'flowchart' # or 'barchart'
