@@ -1,4 +1,4 @@
-# CSV to Mermaid
+# 📊 CSV to Mermaid
 ## Description
 This project is a Ruby script that converts CSV data to Mermaid syntax. It’s designed for users who want to visualize their CSV data as flowcharts or barcharts using Mermaid.
 
